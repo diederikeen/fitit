@@ -1,0 +1,18 @@
+.nav{
+    @include smallOffset;
+    background: $primary-color;
+    font-size: $large-size;
+    color: white;
+    box-shadow: $dropshadow;
+    margin-bottom: 25px;
+
+    .title--main{
+        display: inline-block;
+    }
+
+    .btn--transparent{
+        float: right;
+        margin-top: 2px;
+        color: white;
+    }
+}

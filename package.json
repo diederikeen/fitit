@@ -6,10 +6,10 @@
   "scripts": {
     "build": "parallelshell 'npm run build:scripts' 'npm run build:styles'",
     "build:scripts": "webpack -p",
-    "build:styles": "node-sass src/styles/main.scss dist/public/main.css",
+    "build:styles": "node-sass src/client/app/styles/main.scss src/client/public/main.css",
     "dev": "parallelshell 'npm run dev:scripts' 'npm run dev:styles'",
     "dev:scripts": "webpack -d --watch",
-    "dev:styles": "node-sass -w src/styles/main.scss dist/public/main.css"
+    "dev:styles": "node-sass -w src/client/app/styles/main.scss src/client/public/main.css"
   },
   "author": "",
   "license": "ISC",

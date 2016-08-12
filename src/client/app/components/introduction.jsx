@@ -12,8 +12,6 @@ class Introduction extends React.Component{
         var input = document.getElementById('name');
         this.props.dispatch(setName(input.value));
     }
-
-
     render(){
         return(
             <div>

@@ -1,13 +1,10 @@
-$primary-color: #0069ff;
-$dropshadow: 0px 3px 2px rgba(0,0,0, .2);
-$soft-dropshadow: 0px 2px 4px rgba(0,0,0, .4);
-$t-fast: 125ms;
-$border-radius: 2px;
-
+body,html{
+  padding: 0px;
+  margin: 0px;
+}
 body{
-  background: #fafafa;
   font-family: 'Open Sans', sans-serif;
-  font-size: 14px;
+  font-size: $default-size;
 }
 
 .container{
@@ -30,28 +27,160 @@ select{
   background: white;
   -webkit-appearance: none;
   appearance: none;
-  padding: 14px 7px 15px 15px;
+  padding: $input-padding-select;
   border-radius: $border-radius;
   box-shadow: $dropshadow;
   display: block;
   width: 100%;
 }
 
+input{
+  -webkit-appearance: none;
+  border-radius: 0px;
+  box-sizing: border-box;
+}
+
+input[type="text"]{
+  border: none;
+  background: transparent;
+  font-size: $default-size;
+  border-bottom: $border-bottom;
+  width: 100%;
+  margin-bottom: 10px;
+  padding: $input-padding-text;
+
+  &:focus{
+    @include focusStyle;
+  }
+}
+
+input[type="number"]{
+  border: none;
+  padding: $input-padding-text;
+  border-bottom: $border-bottom;
+  max-width: 50px;
+  font-size: $default-size;
+  text-align: center;
+
+  &:focus{
+    @include focusStyle;
+  }
+}
+
+
+button{
+
+  &:focus{
+    outline: none;
+  }
+}
+
 .btn{
   border: none;
-  font-size: 14px;
+  font-size: 16px;
   width: 100%;
-  padding: 12px 0px 14px 0px;
+  padding: 16px 0px 18px 0px;
   box-shadow: $soft-dropshadow;
   border-radius: $border-radius;
-  transition: all $t-fast ease-in-out;
+  transition: $fast-transition;
+  margin: 10px 0px;
 
   &--primary{
     background-color: $primary-color;
     color: white;
   }
 
+  &--danger{
+    background-color: $danger-color;
+    color: white;
+  }
+
+  &--square{
+    width: auto;
+    padding-left: 10px;
+    padding-right: 10px;
+    text-align: center;
+    margin: 0px 6px;
+    background: $soft-grey;
+    flex-grow: 1;
+
+    @include clearMargins;
+
+  }
+
+  &--transparent{
+    background: none;
+    border: none;
+    width: auto;
+    box-shadow: none;
+    display: inline-block;
+    padding: 0px;
+    padding: 10px 15px;
+    text-transform: uppercase;
+    font-size: $small-size;
+
+    &:hover{
+      background-color: rgba($soft-grey, .4);
+    }
+  }
+
+  &__container{
+
+    &--square{
+      display: flex;
+      @include smallOffset;
+    }
+
+    &--inline{
+      display: flex;
+      flex-direction: row-reverse;
+
+      .btn{
+        display: inline-block;
+        width: auto;
+        flex-grow: 1;
+        margin: 0px 5px;
+        @include clearMarginsReversed;
+      }
+    }
+  }
+
   &:hover{
-    opacity: .9;
+    opacity: .85;
+  }
+
+  &:focus,
+  &:active{
+    box-shadow: $pressed-dropshadow;
+  }
+}
+
+
+.input{
+
+  &__inline{
+    margin-left: 15px;
+  }
+}
+
+.input,
+.label{
+
+  &__inline{
+    display: inline-block;
+    @include clearMargins;
+  }
+}
+
+
+
+
+
+
+.title{
+
+  &--main{
+    margin: 0px;
+    color: white;
   }
 }

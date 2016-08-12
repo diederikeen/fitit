@@ -1,0 +1,54 @@
+$dropshadow: 0px 3px 2px rgba(0,0,0, .2);
+$soft-dropshadow: 0px 2px 4px rgba(0,0,0, .4);
+$pressed-dropshadow: 0px 1px 3px rgba(0,0,0, .4);
+$t-fast: 125ms;
+$t-medium: 250ms;
+$border-radius: 2px;
+$input-padding-select: 14px 7px 15px 15px;
+$input-padding-text: 14px 7px 8px 0px;
+$border-bottom: 1px solid rgba(black,.2);
+
+$primary-color: #0069ff;
+$soft-grey: #efefef;
+$danger-color: #d00000;
+
+$fast-transition: all $t-fast ease-in-out;
+$medium-transition: all $t-medium ease-in-out;
+
+
+$small-size: 12px;
+$default-size: 14px;
+$large-size: 18px;
+
+@mixin focusStyle{
+  border-bottom: 1px solid $primary-color;
+  outline: none;
+  transition: $medium-transition;
+}
+
+@mixin smallOffset{
+  padding: 10px 0px;
+}
+
+@mixin clearMargins{
+
+  &:first-child{
+    margin-left: 0px;
+  }
+
+  &:last-child{
+    margin-right: 0px;
+  }
+}
+
+//incase of flex-direction: row-reversed;
+@mixin clearMarginsReversed{
+
+  &:last-child{
+    margin-left: 0px;
+  }
+
+  &:first-child{
+    margin-right: 0px;
+  }
+}

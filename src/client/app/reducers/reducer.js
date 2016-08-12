@@ -6,6 +6,7 @@ const initialState = {
     workout_type: 1,
     exercise_type: 1,
     exercises: [],
+    session_start: false,
 }
 
 export default function mainReducer(state = initialState, action){
@@ -55,6 +56,13 @@ export default function mainReducer(state = initialState, action){
             workouts: action.data,
             pending: false,
             done: true,
+        }
+    }
+
+    if (action.type == "START_WORKOUT") {
+        return {
+            ...state,
+            session_start: action.data,
         }
     }
 

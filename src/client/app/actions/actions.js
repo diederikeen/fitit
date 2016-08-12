@@ -18,20 +18,26 @@ export function getWorkoutSucces(data){
     return {type: 'GET_WORKOUT_SUCCES', data};
 }
 
-export function setWorkoutType(id){
-    return{type: 'SET_WORKOUT_TYPE', id};
-}
-
 export function getExerciseSucces(data){
     console.log(data);
     return {type: 'GET_EXERCISE_SUCCES', data};
+}
+
+
+//Dispatch sorts
+export function setWorkoutType(id){
+    return{type: 'SET_WORKOUT_TYPE', id};
 }
 
 export function setExercise(id){
     return{type: 'SET_EXERCISE_TYPE', id};
 }
 
-//
+export function startWorkout(data) {
+    return{type: "START_WORKOUT", data};
+}
+
+//API calls
 export function getWorkouts(){
     return (dispatch, newState) => (
         new Promise((resolve, reject) => {
