@@ -1,0 +1,59 @@
+{
+    "workouts": [
+        {
+            "id": 1,
+            "name": "Chest / tricep"
+        },
+        {
+            "id": 2,
+            "name": "Back / Bicep"
+        },
+        {
+            "id": 3,
+            "name": "Shoulder / Legs"
+        }
+    ],
+
+    "exercises": [
+        {
+            "id": 1,
+            "name": "Benchpress",
+            "workout_id": 1
+        },
+        {
+            "id": 2,
+            "name": "Dumbell - Incline flies",
+            "workout_id": 1
+        },
+        {
+            "id": 3,
+            "name": "Skull Crushers",
+            "workout_id": 1
+        },
+        {
+            "id": 4,
+            "name": "Dips",
+            "workout_id": 1
+        },
+        {
+            "id": 5,
+            "name": "Bicep curls",
+            "workout_id": 2
+        },
+        {
+            "id": 6,
+            "name": "Hammer curls",
+            "workout_id": 2
+        },
+        {
+            "id": 7,
+            "name": "Pull-ups",
+            "workout_id": 2
+        },
+        {
+            "id": 8,
+            "name": "Rows",
+            "workout_id": 2
+        }
+    ]
+}
