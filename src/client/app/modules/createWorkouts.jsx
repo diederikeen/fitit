@@ -34,7 +34,6 @@ class CreateWorkouts extends React.Component{
       id: id,
       name: value
     }
-    console.log(arr);
     this.setState({
       exercises: '',
     })
@@ -42,7 +41,7 @@ class CreateWorkouts extends React.Component{
 
 
 render(){
-  console.log(this.state);
+
   return(
     <div>
       <Nav/>
