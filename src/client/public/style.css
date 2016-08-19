@@ -1,10 +1,11 @@
 body, html {
   padding: 0px;
-  margin: 0px; }
+  margin: 0px;
+  font-size: 16px; }
 
 body {
   font-family: 'Open Sans', sans-serif;
-  font-size: 14px; }
+  background: #f9f9f9; }
 
 .container {
   max-width: 960px;
@@ -30,14 +31,14 @@ select {
   width: 100%; }
 
 input {
-  -webkit-appearance: none;
   border-radius: 0px;
   box-sizing: border-box; }
 
 input[type="text"] {
+  -webkit-appearance: none;
   border: none;
   background: transparent;
-  font-size: 14px;
+  font-size: 16px;
   border-bottom: 1px solid rgba(0, 0, 0, 0.2);
   width: 100%;
   margin-bottom: 10px;
@@ -51,9 +52,8 @@ input[type="number"] {
   border: none;
   padding: 14px 7px 8px 0px;
   border-bottom: 1px solid rgba(0, 0, 0, 0.2);
-  max-width: 50px;
-  font-size: 14px;
-  text-align: center; }
+  max-width: 47%;
+  font-size: 16px; }
   input[type="number"]:focus {
     border-bottom: 1px solid #0069ff;
     outline: none;
@@ -101,6 +101,9 @@ button:focus {
     font-size: 12px; }
     .btn--transparent:hover {
       background-color: rgba(239, 239, 239, 0.4); }
+  .btn:disabled {
+    opacity: .5;
+    pointer-events: none; }
   .btn__container--square {
     display: flex;
     padding: 10px 0px; }
@@ -124,6 +127,13 @@ button:focus {
 .input__inline {
   margin-left: 15px; }
 
+.label--input {
+  text-transform: none; }
+  .label--input input[type="checkbox"] {
+    top: -1px;
+    margin-right: 5px;
+    position: relative; }
+
 .input__inline,
 .label__inline {
   display: inline-block; }
@@ -134,23 +144,68 @@ button:focus {
   .label__inline:last-child {
     margin-right: 0px; }
 
+.list {
+  list-style-type: none;
+  padding: 0px;
+  margin: 0px; }
+  .list__item:first-child {
+    margin-left: 0px; }
+  .list__item:last-child {
+    margin-right: 0px; }
+  .list__item a {
+    transition: all 125ms ease-in-out; }
+
 .title--main {
   margin: 0px;
   color: white; }
 
+a {
+  text-decoration: none; }
+
 .form__group {
   margin-bottom: 30px; }
 
+.block {
+  box-shadow: 0px 3px 2px rgba(0, 0, 0, 0.2);
+  background: white;
+  padding: 15px 20px 15px 20px;
+  margin: 15px 0px;
+  box-sizing: border-box; }
+  .block--row {
+    overflow: hidden; }
+  .block--half {
+    width: 48%;
+    float: left;
+    margin-left: 4%; }
+    .block--half:first-child {
+      margin-left: 0px; }
+    .block--half:last-child {
+      margin-right: 0px; }
+  .block--full {
+    width: 100%;
+    display: block; }
+
 .nav {
-  padding: 10px 0px;
   background: #0069ff;
   font-size: 18px;
   color: white;
   box-shadow: 0px 3px 2px rgba(0, 0, 0, 0.2);
   margin-bottom: 25px; }
   .nav .title--main {
-    display: inline-block; }
+    display: inline-block;
+    margin: 10px 0px; }
   .nav .btn--transparent {
     float: right;
     margin-top: 2px;
     color: white; }
+  .nav .list {
+    display: flex;
+    justify-content: flex-start;
+    float: right;
+    height: 100%; }
+    .nav .list a {
+      padding: 16px 15px;
+      display: block;
+      color: white; }
+      .nav .list a:hover {
+        background-color: rgba(255, 255, 255, 0.2); }

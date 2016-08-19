@@ -20,12 +20,12 @@ class Nav extends React.Component{
       <nav className="nav">
         <div className="container">
           <h1 className="title--main">FitIt</h1>
-          {/*<ul>
-            <li><Link to="/">Nav</Link></li>
-            <li><Link to="/about">About</Link></li>
-            <li><Link to="/repos">Repo</Link></li>
+          
+          <ul className="list">
+            <li className="list__item"><Link to="/dashboard">Dashboard</Link></li>
+            <li className="list__item"><Link to="/add-workout">Create workout</Link></li>
+            <li className="list__item"><Link to="/">Start workout</Link></li>
           </ul>      
-          */}
 
           {this.props.session_start == true ? 
             <button className="btn btn--transparent" onClick={this.cancelWorkout}>Cancel session</button>

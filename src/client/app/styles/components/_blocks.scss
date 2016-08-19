@@ -1,0 +1,23 @@
+.block{
+    box-shadow: $dropshadow;
+    background: white;
+    padding: 15px 20px 15px 20px;
+    margin: 15px 0px;
+    box-sizing: border-box;
+
+    &--row{
+        overflow: hidden;
+    }
+
+    &--half{
+        width: 48%;
+        float: left;
+        margin-left: 4%;
+        @include clearMargins;
+    }
+
+    &--full{
+        width: 100%;
+        display: block;
+    }
+}

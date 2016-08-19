@@ -1,10 +1,11 @@
 body,html{
   padding: 0px;
   margin: 0px;
+  font-size: $default-size;
 }
 body{
-  font-family: 'Open Sans', sans-serif;
-  font-size: $default-size;
+  font-family: 'Open Sans', sans-serif;  
+  background: #f9f9f9;
 }
 
 .container{
@@ -35,12 +36,12 @@ select{
 }
 
 input{
-  -webkit-appearance: none;
   border-radius: 0px;
   box-sizing: border-box;
 }
 
 input[type="text"]{
+  -webkit-appearance: none;
   border: none;
   background: transparent;
   font-size: $default-size;
@@ -58,9 +59,8 @@ input[type="number"]{
   border: none;
   padding: $input-padding-text;
   border-bottom: $border-bottom;
-  max-width: 50px;
+  max-width: 47%;
   font-size: $default-size;
-  text-align: center;
 
   &:focus{
     @include focusStyle;
@@ -124,6 +124,11 @@ button{
     }
   }
 
+  &:disabled{
+    opacity: .5;
+    pointer-events: none;
+  }
+
   &__container{
 
     &--square{
@@ -163,6 +168,19 @@ button{
   }
 }
 
+.label{
+
+  &--input{
+    text-transform: none;
+
+    input[type="checkbox"]{
+      top: -1px;
+      margin-right: 5px;
+      position: relative;
+    }
+  }
+}
+
 .input,
 .label{
 
@@ -173,8 +191,19 @@ button{
 }
 
 
+.list{
+  list-style-type: none;
+  padding: 0px;
+  margin: 0px;
 
+  &__item{
+    @include clearMargins;
 
+    a{
+      transition: $fast-transition;
+    }
+  }
+}
 
 
 .title{
@@ -183,4 +212,8 @@ button{
     margin: 0px;
     color: white;
   }
+}
+
+a{
+  text-decoration: none;
 }

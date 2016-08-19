@@ -1,5 +1,4 @@
 .nav{
-    @include smallOffset;
     background: $primary-color;
     font-size: $large-size;
     color: white;
@@ -8,11 +7,29 @@
 
     .title--main{
         display: inline-block;
+        margin: 10px 0px;
     }
 
     .btn--transparent{
         float: right;
         margin-top: 2px;
         color: white;
+    }
+
+    .list{
+        display: flex;
+        justify-content: flex-start;
+        float: right;
+        height: 100%;
+
+        a{
+            padding: 16px 15px;
+            display: block;
+            color: white;
+
+            &:hover{
+                background-color: rgba(white, .2);
+            }
+        }
     }
 }

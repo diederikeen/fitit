@@ -69,22 +69,32 @@
 	
 	var _reducer2 = _interopRequireDefault(_reducer);
 	
-	var _app = __webpack_require__(/*! ./modules/app.jsx */ 268);
+	var _startWorkout = __webpack_require__(/*! ./modules/startWorkout.jsx */ 268);
 	
-	var _app2 = _interopRequireDefault(_app);
+	var _startWorkout2 = _interopRequireDefault(_startWorkout);
+	
+	var _dashboard = __webpack_require__(/*! ./modules/dashboard.jsx */ 275);
+	
+	var _dashboard2 = _interopRequireDefault(_dashboard);
+	
+	var _createWorkouts = __webpack_require__(/*! ./modules/createWorkouts.jsx */ 276);
+	
+	var _createWorkouts2 = _interopRequireDefault(_createWorkouts);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	var store = (0, _redux.createStore)((0, _redux.combineReducers)({ main: _reducer2.default }), (0, _redux.applyMiddleware)(_reduxThunk2.default));
 	
 	(0, _reactDom.render)(_react2.default.createElement(
-	    _reactRedux.Provider,
-	    { store: store },
-	    _react2.default.createElement(
-	        _reactRouter.Router,
-	        { history: _reactRouter.hashHistory },
-	        _react2.default.createElement(_reactRouter.Route, { path: '/', component: _app2.default })
-	    )
+	  _reactRedux.Provider,
+	  { store: store },
+	  _react2.default.createElement(
+	    _reactRouter.Router,
+	    { history: _reactRouter.hashHistory },
+	    _react2.default.createElement(_reactRouter.Route, { path: '/', component: _startWorkout2.default }),
+	    _react2.default.createElement(_reactRouter.Route, { path: '/dashboard', component: _dashboard2.default }),
+	    _react2.default.createElement(_reactRouter.Route, { path: '/add-workout', component: _createWorkouts2.default })
+	  )
 	), document.getElementById('app'));
 
 /***/ },
@@ -29753,9 +29763,9 @@
 
 /***/ },
 /* 268 */
-/*!****************************************!*\
-  !*** ./src/client/app/modules/app.jsx ***!
-  \****************************************/
+/*!*************************************************!*\
+  !*** ./src/client/app/modules/startWorkout.jsx ***!
+  \*************************************************/
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -29776,19 +29786,17 @@
 	
 	var _select2 = _interopRequireDefault(_select);
 	
-	var _selectExercise = __webpack_require__(/*! ../components/selectExercise.jsx */ 270);
-	
-	var _selectExercise2 = _interopRequireDefault(_selectExercise);
-	
-	var _nav = __webpack_require__(/*! ../components/nav.jsx */ 271);
+	var _nav = __webpack_require__(/*! ../components/nav.jsx */ 270);
 	
 	var _nav2 = _interopRequireDefault(_nav);
 	
-	var _addFields = __webpack_require__(/*! ../components/addFields.jsx */ 272);
+	var _stepOne = __webpack_require__(/*! ../components/stepOne.jsx */ 272);
 	
-	var _addFields2 = _interopRequireDefault(_addFields);
+	var _stepOne2 = _interopRequireDefault(_stepOne);
 	
-	var _actions = __webpack_require__(/*! ../actions/actions.js */ 274);
+	var _stepTwo = __webpack_require__(/*! ../components/stepTwo.jsx */ 273);
+	
+	var _stepTwo2 = _interopRequireDefault(_stepTwo);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -29798,48 +29806,18 @@
 	
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 	
-	var App = function (_React$Component) {
-	  _inherits(App, _React$Component);
+	var StartWorkout = function (_React$Component) {
+	  _inherits(StartWorkout, _React$Component);
 	
-	  function App() {
-	    _classCallCheck(this, App);
+	  function StartWorkout() {
+	    _classCallCheck(this, StartWorkout);
 	
-	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(App).call(this));
-	
-	    _this.setWorkout = _this.setWorkout.bind(_this);
-	    _this.setExercise = _this.setExercise.bind(_this);
-	    _this.startWorkout = _this.startWorkout.bind(_this);
-	    return _this;
+	    return _possibleConstructorReturn(this, Object.getPrototypeOf(StartWorkout).call(this));
 	  }
 	
-	  _createClass(App, [{
-	    key: 'componentDidMount',
-	    value: function componentDidMount() {
-	      this.props.dispatch((0, _actions.getWorkouts)());
-	      this.props.dispatch((0, _actions.getExercises)());
-	    }
-	  }, {
-	    key: 'setWorkout',
-	    value: function setWorkout() {
-	      var select = document.getElementById('selectWorkout');
-	      this.props.dispatch((0, _actions.setWorkoutType)(select.value));
-	    }
-	  }, {
-	    key: 'setExercise',
-	    value: function setExercise(message) {
-	      var select = document.getElementById('selectExercise');
-	      this.props.dispatch((0, _actions.setExercise)(select.value));
-	    }
-	  }, {
-	    key: 'startWorkout',
-	    value: function startWorkout() {
-	      this.props.dispatch((0, _actions.startWorkout)(true));
-	    }
-	  }, {
+	  _createClass(StartWorkout, [{
 	    key: 'render',
 	    value: function render() {
-	      var _this2 = this;
-	
 	      return _react2.default.createElement(
 	        'div',
 	        null,
@@ -29847,68 +29825,14 @@
 	        _react2.default.createElement(
 	          'div',
 	          { className: 'container' },
-	          this.props.session_start == false ? _react2.default.createElement(
-	            'form',
-	            null,
-	            this.props.done ? _react2.default.createElement(
-	              'div',
-	              { className: 'form__group' },
-	              _react2.default.createElement(
-	                'label',
-	                null,
-	                'Select your workout'
-	              ),
-	              _react2.default.createElement(
-	                _select2.default,
-	                { onChange: this.setWorkout, id: 'selectWorkout' },
-	                this.props.workouts.map(function (item) {
-	                  return _react2.default.createElement(
-	                    'option',
-	                    { key: item.id, value: item.id },
-	                    item.name
-	                  );
-	                })
-	              )
-	            ) : '',
-	            _react2.default.createElement(
-	              'div',
-	              { className: 'form__group' },
-	              _react2.default.createElement(
-	                'label',
-	                null,
-	                'Select your Exercise'
-	              ),
-	              _react2.default.createElement(
-	                _select2.default,
-	                { onChange: this.setExercise, id: 'selectExercise' },
-	                this.props.exercises.filter(function (exercise) {
-	                  return exercise.workout_id === parseInt(_this2.props.workout_type);
-	                }).map(function (exercise) {
-	                  return _react2.default.createElement(
-	                    'option',
-	                    { key: exercise.id, value: exercise.id },
-	                    exercise.name
-	                  );
-	                })
-	              )
-	            ),
-	            _react2.default.createElement(
-	              'button',
-	              { type: 'button', onClick: this.startWorkout, className: 'btn btn--primary' },
-	              'Start workout'
-	            )
-	          ) : '',
-	          this.props.session_start == true ? _react2.default.createElement(
-	            'form',
-	            null,
-	            _react2.default.createElement(_addFields2.default, null)
-	          ) : ''
+	          this.props.session_start == false ? _react2.default.createElement(_stepOne2.default, null) : '',
+	          this.props.session_start == true ? _react2.default.createElement(_stepTwo2.default, null) : ''
 	        )
 	      );
 	    }
 	  }]);
 	
-	  return App;
+	  return StartWorkout;
 	}(_react2.default.Component);
 	
 	exports.default = (0, _reactRedux.connect)(function (state) {
@@ -29920,7 +29844,7 @@
 	    done: state.main.done,
 	    pending: state.main.pending
 	  };
-	})(App);
+	})(StartWorkout);
 
 /***/ },
 /* 269 */
@@ -29958,34 +29882,6 @@
 
 /***/ },
 /* 270 */
-/*!******************************************************!*\
-  !*** ./src/client/app/components/selectExercise.jsx ***!
-  \******************************************************/
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.default = SelectExercise;
-	
-	var _react = __webpack_require__(/*! react */ 1);
-	
-	var _react2 = _interopRequireDefault(_react);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	function SelectExercise() {
-	  return _react2.default.createElement(
-	    'h1',
-	    null,
-	    'Selecteer oefening'
-	  );
-	}
-
-/***/ },
-/* 271 */
 /*!*******************************************!*\
   !*** ./src/client/app/components/nav.jsx ***!
   \*******************************************/
@@ -30007,7 +29903,7 @@
 	
 	var _reactRedux = __webpack_require__(/*! react-redux */ 176);
 	
-	var _actions = __webpack_require__(/*! ../actions/actions.js */ 274);
+	var _actions = __webpack_require__(/*! ../actions/actions.js */ 271);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -30048,6 +29944,37 @@
 	            { className: 'title--main' },
 	            'FitIt'
 	          ),
+	          _react2.default.createElement(
+	            'ul',
+	            { className: 'list' },
+	            _react2.default.createElement(
+	              'li',
+	              { className: 'list__item' },
+	              _react2.default.createElement(
+	                _reactRouter.Link,
+	                { to: '/dashboard' },
+	                'Dashboard'
+	              )
+	            ),
+	            _react2.default.createElement(
+	              'li',
+	              { className: 'list__item' },
+	              _react2.default.createElement(
+	                _reactRouter.Link,
+	                { to: '/add-workout' },
+	                'Create workout'
+	              )
+	            ),
+	            _react2.default.createElement(
+	              'li',
+	              { className: 'list__item' },
+	              _react2.default.createElement(
+	                _reactRouter.Link,
+	                { to: '/' },
+	                'Start workout'
+	              )
+	            )
+	          ),
 	          this.props.session_start == true ? _react2.default.createElement(
 	            'button',
 	            { className: 'btn btn--transparent', onClick: this.cancelWorkout },
@@ -30068,185 +29995,7 @@
 	})(Nav);
 
 /***/ },
-/* 272 */
-/*!*************************************************!*\
-  !*** ./src/client/app/components/addFields.jsx ***!
-  \*************************************************/
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-	
-	var _react = __webpack_require__(/*! react */ 1);
-	
-	var _react2 = _interopRequireDefault(_react);
-	
-	var _inputTwo = __webpack_require__(/*! ../elements/input-two.jsx */ 273);
-	
-	var _inputTwo2 = _interopRequireDefault(_inputTwo);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-	
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-	
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-	
-	var AddFields = function (_React$Component) {
-	  _inherits(AddFields, _React$Component);
-	
-	  function AddFields() {
-	    _classCallCheck(this, AddFields);
-	
-	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(AddFields).call(this));
-	
-	    _this.setSets = _this.setSets.bind(_this);
-	
-	    _this.state = {
-	      reps: 0
-	    };
-	    return _this;
-	  }
-	
-	  _createClass(AddFields, [{
-	    key: 'setSets',
-	    value: function setSets(value) {
-	      this.setState({
-	        reps: parseInt(value)
-	      });
-	    }
-	  }, {
-	    key: 'render',
-	    value: function render() {
-	      var _this2 = this;
-	
-	      return _react2.default.createElement(
-	        'div',
-	        { className: 'form__group' },
-	        _react2.default.createElement(
-	          'label',
-	          { className: 'label__inline' },
-	          'Amount of sets'
-	        ),
-	        _react2.default.createElement(
-	          'div',
-	          { className: 'btn__container--square' },
-	          _react2.default.createElement(
-	            'button',
-	            { onClick: function onClick(ev) {
-	                return _this2.setSets(ev.target.value);
-	              }, className: 'btn btn--square', type: 'button', value: '2' },
-	            '2 Sets'
-	          ),
-	          _react2.default.createElement(
-	            'button',
-	            { onClick: function onClick(ev) {
-	                return _this2.setSets(ev.target.value);
-	              }, className: 'btn btn--square', type: 'button', value: '3' },
-	            '3 Sets'
-	          ),
-	          _react2.default.createElement(
-	            'button',
-	            { onClick: function onClick(ev) {
-	                return _this2.setSets(ev.target.value);
-	              }, className: 'btn btn--square', type: 'button', value: '4' },
-	            '4 Sets'
-	          ),
-	          _react2.default.createElement(
-	            'button',
-	            { onClick: function onClick(ev) {
-	                return _this2.setSets(ev.target.value);
-	              }, className: 'btn btn--square', type: 'button', value: '5' },
-	            '5 Sets'
-	          )
-	        ),
-	        _react2.default.createElement(
-	          'div',
-	          { 'data-submit-form': true },
-	          _react2.default.createElement(
-	            'div',
-	            { className: 'form__group' },
-	            new Array(this.state.reps).fill(0).map(function (i, index) {
-	              return _react2.default.createElement(_inputTwo2.default, { key: index });
-	            })
-	          )
-	        ),
-	        _react2.default.createElement(
-	          'div',
-	          { className: 'btn__container--inline' },
-	          _react2.default.createElement(
-	            'button',
-	            { type: 'button', disabled: true, className: 'btn btn--primary' },
-	            'Save exercise'
-	          ),
-	          _react2.default.createElement(
-	            'button',
-	            { type: 'button', disabled: true, className: 'btn btn--danger' },
-	            'Skip exercise'
-	          )
-	        )
-	      );
-	    }
-	  }]);
-	
-	  return AddFields;
-	}(_react2.default.Component);
-	
-	exports.default = AddFields;
-
-/***/ },
-/* 273 */
-/*!***********************************************!*\
-  !*** ./src/client/app/elements/input-two.jsx ***!
-  \***********************************************/
-/***/ function(module, exports, __webpack_require__) {
-
-	"use strict";
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	
-	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-	
-	exports.default = DubbleInput;
-	
-	var _react = __webpack_require__(/*! react */ 1);
-	
-	var _react2 = _interopRequireDefault(_react);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
-	
-	function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
-	
-	function DubbleInput(_ref) {
-	  var _console;
-	
-	  var children = _ref.children;
-	
-	  var props = _objectWithoutProperties(_ref, ["children"]);
-	
-	  (_console = console).log.apply(_console, _toConsumableArray(props));
-	  return _react2.default.createElement(
-	    "div",
-	    null,
-	    _react2.default.createElement("input", _extends({ type: "number", className: "input__inline" }, props, { placeholder: "Reps" })),
-	    _react2.default.createElement("input", _extends({ type: "number", className: "input__inline" }, props, { placeholder: "KG" }))
-	  );
-	}
-	
-	exports.default = DubbleInput;
-
-/***/ },
-/* 274 */
+/* 271 */
 /*!*******************************************!*\
   !*** ./src/client/app/actions/actions.js ***!
   \*******************************************/
@@ -30287,7 +30036,6 @@
 	}
 	
 	function getExerciseSucces(data) {
-	    console.log(data);
 	    return { type: 'GET_EXERCISE_SUCCES', data: data };
 	}
 	
@@ -30334,6 +30082,596 @@
 	        });
 	    };
 	}
+
+/***/ },
+/* 272 */
+/*!***********************************************!*\
+  !*** ./src/client/app/components/stepOne.jsx ***!
+  \***********************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _react = __webpack_require__(/*! react */ 1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactRedux = __webpack_require__(/*! react-redux */ 176);
+	
+	var _actions = __webpack_require__(/*! ../actions/actions.js */ 271);
+	
+	var _select = __webpack_require__(/*! ../elements/select.jsx */ 269);
+	
+	var _select2 = _interopRequireDefault(_select);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var StepOne = function (_React$Component) {
+	    _inherits(StepOne, _React$Component);
+	
+	    function StepOne() {
+	        _classCallCheck(this, StepOne);
+	
+	        var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(StepOne).call(this));
+	
+	        _this.setWorkout = _this.setWorkout.bind(_this);
+	        _this.setExercise = _this.setExercise.bind(_this);
+	        _this.startWorkout = _this.startWorkout.bind(_this);
+	        return _this;
+	    }
+	
+	    _createClass(StepOne, [{
+	        key: 'componentDidMount',
+	        value: function componentDidMount() {
+	            this.props.dispatch((0, _actions.getWorkouts)());
+	            this.props.dispatch((0, _actions.getExercises)());
+	        }
+	    }, {
+	        key: 'setWorkout',
+	        value: function setWorkout() {
+	            var select = document.getElementById('selectWorkout');
+	            this.props.dispatch((0, _actions.setWorkoutType)(select.value));
+	        }
+	    }, {
+	        key: 'setExercise',
+	        value: function setExercise() {
+	            var select = document.getElementById('selectExercise');
+	            console.log(select.options[select.selectedIndex].text);
+	            this.props.dispatch((0, _actions.setExercise)(select.value));
+	        }
+	    }, {
+	        key: 'startWorkout',
+	        value: function startWorkout() {
+	            this.props.dispatch((0, _actions.startWorkout)(true));
+	        }
+	    }, {
+	        key: 'render',
+	        value: function render() {
+	            var _this2 = this;
+	
+	            return _react2.default.createElement(
+	                'div',
+	                null,
+	                _react2.default.createElement(
+	                    'div',
+	                    { className: 'form__group' },
+	                    _react2.default.createElement(
+	                        'label',
+	                        null,
+	                        'Select workout'
+	                    ),
+	                    _react2.default.createElement(
+	                        _select2.default,
+	                        { onChange: this.setWorkout, id: 'selectWorkout' },
+	                        this.props.workouts.map(function (item) {
+	                            return _react2.default.createElement(
+	                                'option',
+	                                { key: item.id, value: item.id },
+	                                item.name
+	                            );
+	                        })
+	                    )
+	                ),
+	                _react2.default.createElement(
+	                    'div',
+	                    { className: 'form__group' },
+	                    _react2.default.createElement(
+	                        'label',
+	                        null,
+	                        'Select your starting exercise'
+	                    ),
+	                    _react2.default.createElement(
+	                        _select2.default,
+	                        { onChange: this.setExercise, id: 'selectExercise' },
+	                        this.props.exercises.filter(function (exercise) {
+	                            return exercise.workout_id === parseInt(_this2.props.workout_type);
+	                        }).map(function (exercise) {
+	                            return _react2.default.createElement(
+	                                'option',
+	                                { key: exercise.id, value: exercise.id },
+	                                exercise.name
+	                            );
+	                        })
+	                    )
+	                ),
+	                _react2.default.createElement(
+	                    'button',
+	                    { className: 'btn btn--primary', onClick: this.startWorkout },
+	                    'Next step'
+	                )
+	            );
+	        }
+	    }]);
+	
+	    return StepOne;
+	}(_react2.default.Component);
+	
+	exports.default = (0, _reactRedux.connect)(function (state) {
+	    return {
+	        workouts: state.main.workouts,
+	        workout_type: state.main.workout_type,
+	        exercises: state.main.exercises,
+	        session_start: state.main.session_start,
+	        done: state.main.done,
+	        pending: state.main.pending
+	    };
+	})(StepOne);
+
+/***/ },
+/* 273 */
+/*!***********************************************!*\
+  !*** ./src/client/app/components/stepTwo.jsx ***!
+  \***********************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _react = __webpack_require__(/*! react */ 1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactRedux = __webpack_require__(/*! react-redux */ 176);
+	
+	var _actions = __webpack_require__(/*! ../actions/actions.js */ 271);
+	
+	var _select = __webpack_require__(/*! ../elements/select.jsx */ 269);
+	
+	var _select2 = _interopRequireDefault(_select);
+	
+	var _inputDubble = __webpack_require__(/*! ../elements/input-dubble.jsx */ 274);
+	
+	var _inputDubble2 = _interopRequireDefault(_inputDubble);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var StepTwo = function (_React$Component) {
+	  _inherits(StepTwo, _React$Component);
+	
+	  function StepTwo() {
+	    _classCallCheck(this, StepTwo);
+	
+	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(StepTwo).call(this));
+	
+	    _this.setSets = _this.setSets.bind(_this);
+	
+	    _this.state = {
+	      reps: 0
+	    };
+	    return _this;
+	  }
+	
+	  _createClass(StepTwo, [{
+	    key: 'setSets',
+	    value: function setSets(value) {
+	      this.setState({
+	        reps: parseInt(value)
+	      });
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      var _this2 = this;
+	
+	      return _react2.default.createElement(
+	        'div',
+	        null,
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'form__group' },
+	          _react2.default.createElement(
+	            'label',
+	            { className: 'label__inline' },
+	            'Amount of sets'
+	          ),
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'btn__container--square' },
+	            _react2.default.createElement(
+	              'button',
+	              { onClick: function onClick(ev) {
+	                  return _this2.setSets(ev.target.value);
+	                }, className: 'btn btn--square', type: 'button', value: '2' },
+	              '2 Sets'
+	            ),
+	            _react2.default.createElement(
+	              'button',
+	              { onClick: function onClick(ev) {
+	                  return _this2.setSets(ev.target.value);
+	                }, className: 'btn btn--square', type: 'button', value: '3' },
+	              '3 Sets'
+	            ),
+	            _react2.default.createElement(
+	              'button',
+	              { onClick: function onClick(ev) {
+	                  return _this2.setSets(ev.target.value);
+	                }, className: 'btn btn--square', type: 'button', value: '4' },
+	              '4 Sets'
+	            ),
+	            _react2.default.createElement(
+	              'button',
+	              { onClick: function onClick(ev) {
+	                  return _this2.setSets(ev.target.value);
+	                }, className: 'btn btn--square', type: 'button', value: '5' },
+	              '5 Sets'
+	            )
+	          ),
+	          _react2.default.createElement(
+	            'div',
+	            { 'data-submit-form': true },
+	            _react2.default.createElement(
+	              'div',
+	              { className: 'form__group' },
+	              new Array(this.state.reps).fill(0).map(function (i, index) {
+	                return _react2.default.createElement(_inputDubble2.default, { key: index });
+	              })
+	            )
+	          ),
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'btn__container--inline' },
+	            _react2.default.createElement(
+	              'button',
+	              { type: 'button', disabled: true, className: 'btn btn--primary' },
+	              'Save exercise'
+	            )
+	          )
+	        )
+	      );
+	    }
+	  }]);
+	
+	  return StepTwo;
+	}(_react2.default.Component);
+	
+	exports.default = (0, _reactRedux.connect)(function (state) {
+	  return {
+	    workouts: state.main.workouts,
+	    workout_type: state.main.workout_type,
+	    exercises: state.main.exercises,
+	    session_start: state.main.session_start,
+	    done: state.main.done,
+	    pending: state.main.pending
+	  };
+	})(StepTwo);
+
+/***/ },
+/* 274 */
+/*!**************************************************!*\
+  !*** ./src/client/app/elements/input-dubble.jsx ***!
+  \**************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
+	exports.default = DubbleInput;
+	
+	var _react = __webpack_require__(/*! react */ 1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+	
+	function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+	
+	function DubbleInput(_ref) {
+	  var _console;
+	
+	  var children = _ref.children;
+	
+	  var props = _objectWithoutProperties(_ref, ["children"]);
+	
+	  (_console = console).log.apply(_console, _toConsumableArray(props));
+	  return _react2.default.createElement(
+	    "div",
+	    null,
+	    _react2.default.createElement("input", _extends({ type: "number", className: "input__inline" }, props, { placeholder: "Reps" })),
+	    _react2.default.createElement("input", _extends({ type: "number", className: "input__inline" }, props, { placeholder: "KG" }))
+	  );
+	}
+	
+	exports.default = DubbleInput;
+
+/***/ },
+/* 275 */
+/*!**********************************************!*\
+  !*** ./src/client/app/modules/dashboard.jsx ***!
+  \**********************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _react = __webpack_require__(/*! react */ 1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _nav = __webpack_require__(/*! ../components/nav.jsx */ 270);
+	
+	var _nav2 = _interopRequireDefault(_nav);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var Dashboard = function (_React$Component) {
+	    _inherits(Dashboard, _React$Component);
+	
+	    function Dashboard() {
+	        _classCallCheck(this, Dashboard);
+	
+	        return _possibleConstructorReturn(this, Object.getPrototypeOf(Dashboard).apply(this, arguments));
+	    }
+	
+	    _createClass(Dashboard, [{
+	        key: 'render',
+	        value: function render() {
+	
+	            return _react2.default.createElement(
+	                'div',
+	                null,
+	                _react2.default.createElement(_nav2.default, null),
+	                _react2.default.createElement(
+	                    'div',
+	                    { className: 'container' },
+	                    _react2.default.createElement(
+	                        'div',
+	                        { className: 'block--row' },
+	                        _react2.default.createElement(
+	                            'div',
+	                            { className: 'block block--half' },
+	                            _react2.default.createElement(
+	                                'p',
+	                                null,
+	                                'Lorem Ipsum is slechts een proeftekst uit het drukkerij- en zetterijwezen. Lorem Ipsum is de standaard proeftekst in deze bedrijfstak sinds de 16e eeuw, toen een onbekende drukker een zethaak met letters nam en ze door elkaar husselde om een font-catalogus te maken.'
+	                            )
+	                        ),
+	                        _react2.default.createElement(
+	                            'div',
+	                            { className: 'block block--half' },
+	                            _react2.default.createElement(
+	                                'p',
+	                                null,
+	                                'Het heeft niet alleen vijf eeuwen overleefd maar is ook, vrijwel onveranderd, overgenomen in elektronische letterzetting. Het is in de jaren 60 populair geworden met de introductie van Letraset vellen met Lorem Ipsum passages en meer recentelijk door desktop publishing software zoals Aldus PageMaker die versies van Lorem Ipsum bevatten.'
+	                            )
+	                        )
+	                    ),
+	                    _react2.default.createElement(
+	                        'div',
+	                        { className: 'block block--full' },
+	                        _react2.default.createElement(
+	                            'p',
+	                            null,
+	                            'Het is al geruime tijd een bekend gegeven dat een lezer, tijdens het bekijken van de layout van een pagina, afgeleid wordt door de tekstuele inhoud.'
+	                        )
+	                    )
+	                )
+	            );
+	        }
+	    }]);
+	
+	    return Dashboard;
+	}(_react2.default.Component);
+	
+	exports.default = Dashboard;
+
+/***/ },
+/* 276 */
+/*!***************************************************!*\
+  !*** ./src/client/app/modules/createWorkouts.jsx ***!
+  \***************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _react = __webpack_require__(/*! react */ 1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactRedux = __webpack_require__(/*! react-redux */ 176);
+	
+	var _nav = __webpack_require__(/*! ../components/nav.jsx */ 270);
+	
+	var _nav2 = _interopRequireDefault(_nav);
+	
+	var _actions = __webpack_require__(/*! ../actions/actions.js */ 271);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var CreateWorkouts = function (_React$Component) {
+	  _inherits(CreateWorkouts, _React$Component);
+	
+	  function CreateWorkouts() {
+	    _classCallCheck(this, CreateWorkouts);
+	
+	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(CreateWorkouts).call(this));
+	
+	    _this.setWorkoutName = _this.setWorkoutName.bind(_this);
+	    _this.addExercise = _this.addExercise.bind(_this);
+	
+	    _this.state = {
+	      nameWorkout: ''
+	    };
+	
+	    var arr = [];
+	    return _this;
+	  }
+	
+	  _createClass(CreateWorkouts, [{
+	    key: 'componentDidMount',
+	    value: function componentDidMount() {
+	      this.props.dispatch((0, _actions.getWorkouts)());
+	      this.props.dispatch((0, _actions.getExercises)());
+	    }
+	  }, {
+	    key: 'setWorkoutName',
+	    value: function setWorkoutName(value) {
+	      this.setState({
+	        nameWorkout: value
+	      });
+	    }
+	  }, {
+	    key: 'addExercise',
+	    value: function addExercise(id, value) {
+	      var obj = {
+	        id: id,
+	        name: value
+	      };
+	      console.log(arr);
+	      this.setState({
+	        exercises: ''
+	      });
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      var _this2 = this;
+	
+	      console.log(this.state);
+	      return _react2.default.createElement(
+	        'div',
+	        null,
+	        _react2.default.createElement(_nav2.default, null),
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'container' },
+	          _react2.default.createElement(
+	            'h2',
+	            null,
+	            'Create your workouts'
+	          ),
+	          _react2.default.createElement(
+	            'p',
+	            null,
+	            'These will be displayed as soon as you start your workout on your mobile'
+	          ),
+	          _react2.default.createElement(
+	            'form',
+	            null,
+	            _react2.default.createElement(
+	              'div',
+	              { className: 'form__group' },
+	              _react2.default.createElement(
+	                'label',
+	                null,
+	                'Name your workout'
+	              ),
+	              _react2.default.createElement('input', { type: 'text', placeholder: 'Name workout', onChange: function onChange(ev) {
+	                  return _this2.setWorkoutName(ev.target.value);
+	                } })
+	            ),
+	            _react2.default.createElement(
+	              'div',
+	              { className: 'form__group' },
+	              _react2.default.createElement(
+	                'label',
+	                null,
+	                'Select the exercises for this workout'
+	              ),
+	              this.props.exercises.map(function (exercise) {
+	                return _react2.default.createElement(
+	                  'div',
+	                  { key: exercise.id },
+	                  _react2.default.createElement(
+	                    'label',
+	                    { className: 'label--input' },
+	                    _react2.default.createElement('input', { onChange: function onChange(ev) {
+	                        return _this2.addExercise(exercise.id, ev.target.value);
+	                      }, type: 'checkbox', value: exercise.name }),
+	                    exercise.name
+	                  )
+	                );
+	              })
+	            )
+	          )
+	        )
+	      );
+	    }
+	  }]);
+	
+	  return CreateWorkouts;
+	}(_react2.default.Component);
+	
+	exports.default = (0, _reactRedux.connect)(function (state) {
+	  return {
+	    workouts: state.main.workouts,
+	    exercises: state.main.exercises,
+	    done: state.main.done,
+	    pending: state.main.pending
+	  };
+	})(CreateWorkouts);
 
 /***/ }
 /******/ ]);

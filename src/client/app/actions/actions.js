@@ -19,7 +19,6 @@ export function getWorkoutSucces(data){
 }
 
 export function getExerciseSucces(data){
-    console.log(data);
     return {type: 'GET_EXERCISE_SUCCES', data};
 }
 
