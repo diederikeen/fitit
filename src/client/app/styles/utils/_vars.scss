@@ -10,6 +10,7 @@ $border-bottom: 1px solid rgba(black,.2);
 
 $primary-color: #0069ff;
 $soft-grey: #efefef;
+$hard-grey: #efefef;
 $danger-color: #d00000;
 
 $fast-transition: all $t-fast ease-in-out;
@@ -52,3 +53,17 @@ $large-size: 18px;
     margin-right: 0px;
   }
 }
+
+
+//Mixins
+@mixin mq-desk{
+    @media (min-width: 992px){
+        @content
+    }
+};
+
+@mixin mq-tablet{
+    @media (min-width: 992px) and (max-width: 1200px){
+        @content
+    }
+};

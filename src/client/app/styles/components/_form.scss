@@ -4,3 +4,83 @@
     margin-bottom: 30px;
   }
 }
+
+label{
+  display: block;
+  font-weight: 600;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+
+select{
+  border: none;
+  background: white;
+  -webkit-appearance: none;
+  appearance: none;
+  padding: $input-padding-select;
+  border-radius: $border-radius;
+  box-shadow: $dropshadow;
+  display: block;
+  width: 100%;
+}
+
+input{
+  border-radius: 0px;
+  box-sizing: border-box;
+}
+
+input[type="text"]{
+  -webkit-appearance: none;
+  border: none;
+  background: transparent;
+  font-size: $default-size;
+  border-bottom: $border-bottom;
+  width: 100%;
+  margin-bottom: 10px;
+  padding: $input-padding-text;
+
+  &:focus{
+    @include focusStyle;
+  }
+}
+
+input[type="number"]{
+  border: none;
+  padding: $input-padding-text;
+  border-bottom: $border-bottom;
+  max-width: 47%;
+  font-size: $default-size;
+
+  &:focus{
+    @include focusStyle;
+  }
+}
+
+.input{
+
+  &__inline{
+    margin-left: 15px;
+  }
+}
+
+.label{
+
+  &--input{
+    text-transform: none;
+
+    input[type="checkbox"]{
+      top: -1px;
+      margin-right: 5px;
+      position: relative;
+    }
+  }
+}
+
+.input,
+.label{
+
+  &__inline{
+    display: inline-block;
+    @include clearMargins;
+  }
+}

@@ -1,0 +1,31 @@
+h2,h3{
+  padding: 0px;
+  margin: 0px;
+}
+
+.list{
+  list-style-type: none;
+  padding: 0px;
+  margin: 0px;
+
+  &__item{
+    @include clearMargins;
+
+    a{
+      transition: $fast-transition;
+    }
+  }
+}
+
+
+.title{
+
+  &--main{
+    margin: 0px;
+    color: white;
+  }
+}
+
+a{
+  text-decoration: none;
+}

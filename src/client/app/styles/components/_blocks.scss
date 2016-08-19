@@ -10,14 +10,23 @@
     }
 
     &--half{
-        width: 48%;
         float: left;
-        margin-left: 4%;
+        width: 100%;
         @include clearMargins;
     }
 
     &--full{
         width: 100%;
         display: block;
+    }
+}
+
+@include mq-desk{
+    .block{
+
+        &--half{
+            width: 48%;
+            margin-left: 4%;
+        }
     }
 }

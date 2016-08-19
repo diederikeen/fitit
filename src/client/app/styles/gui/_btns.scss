@@ -1,0 +1,113 @@
+button{
+
+  &:focus{
+    outline: none;
+  }
+}
+
+.btn{
+  border: none;
+  font-size: 16px;
+  width: 100%;
+  padding: 16px 0px 18px 0px;
+  box-shadow: $soft-dropshadow;
+  border-radius: $border-radius;
+  transition: $fast-transition;
+  margin: 10px 0px;
+
+  &--primary{
+    background-color: $primary-color;
+    color: white;
+  }
+
+  &--danger{
+    background-color: $danger-color;
+    color: white;
+  }
+
+  &--square{
+    width: auto;
+    padding-left: 10px;
+    padding-right: 10px;
+    text-align: center;
+    margin: 0px 6px;
+    background: $soft-grey;
+    flex-grow: 1;
+
+    @include clearMargins;
+
+  }
+
+  &--transparent{
+    background: none;
+    border: none;
+    width: auto;
+    box-shadow: none;
+    display: inline-block;
+    padding: 0px;
+    padding: 10px 15px;
+    text-transform: uppercase;
+    font-size: $small-size;
+
+    &:hover{
+      background-color: rgba($soft-grey, .4);
+    }
+  }
+
+  &--tab{
+    flex-grow:1;
+    background: white;
+    box-shadow: none;
+    border-left: 1px solid $soft-grey;
+    margin: 0px;
+
+    &:first-child{
+      border-left: none;
+    }
+
+    &:active{
+      color: white;
+      background: $primary-color;
+    }
+  }
+
+  &__container{
+
+    &--square{
+      display: flex;
+      @include smallOffset;
+    }
+
+    &--inline{
+      display: flex;
+      flex-direction: row-reverse;
+
+      .btn{
+        display: inline-block;
+        width: auto;
+        flex-grow: 1;
+        margin: 0px 5px;
+        @include clearMarginsReversed;
+      }
+    }
+  }
+
+  &--tabs{
+    display: flex;
+    border: 1px solid $hard-grey;
+    margin-bottom: 15px;
+  }
+
+  &:hover{
+    opacity: .85;
+  }
+
+  &:active{
+    box-shadow: $pressed-dropshadow;
+  }
+
+  &:disabled{
+    opacity: .5;
+    pointer-events: none;
+  }
+}

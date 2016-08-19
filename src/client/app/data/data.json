@@ -18,42 +18,104 @@
         {
             "id": 1,
             "name": "Benchpress",
-            "workout_id": 1
+            "workout_id": 1,
+            "primary_muscle_id": 2
         },
         {
             "id": 2,
             "name": "Dumbell - Incline flies",
-            "workout_id": 1
+            "workout_id": 1,
+            "primary_muscle_id": 2
         },
         {
             "id": 3,
             "name": "Skull Crushers",
-            "workout_id": 1
+            "workout_id": 1,
+            "primary_muscle_id": 1
         },
         {
             "id": 4,
             "name": "Dips",
-            "workout_id": 1
+            "workout_id": 1,
+            "primary_muscle_id": 2
         },
         {
             "id": 5,
             "name": "Bicep curls",
-            "workout_id": 2
+            "workout_id": 2,
+            "primary_muscle_id": 5
         },
         {
             "id": 6,
             "name": "Hammer curls",
-            "workout_id": 2
+            "workout_id": 2,
+            "primary_muscle_id": 5
         },
         {
             "id": 7,
             "name": "Pull-ups",
-            "workout_id": 2
+            "workout_id": 2,
+            "primary_muscle_id": 4
         },
         {
             "id": 8,
             "name": "Rows",
-            "workout_id": 2
+            "workout_id": 2,
+            "primary_muscle_id": 4
+        }
+    ],
+
+    "muscles": [
+        {
+            "id": 1,
+            "primary_muscle": "Tricep"
+        },
+        {
+            "id": 2,
+            "primary_muscle": "Chest"
+        },
+        {
+            "id": 3,
+            "primary_muscle": "Shoulder"
+        },
+        {
+            "id": 4,
+            "primary_muscle": "Back"
+        },
+        {
+            "id": 5,
+            "primary_muscle": "Bicep"
+        },
+        {
+            "id": 6,
+            "primary_muscle": "Upperlegs"
+        },
+        {
+            "id": 7,
+            "primary_muscle": "Calves"
+        },
+        {
+            "id": 8,
+            "primary_muscle": "Abs"
+        }
+    ],
+
+    "sessions":[
+        {
+            "id": 1,
+            "workout_id": 1,
+            "exercises": [
+                {
+                    "id": 1,
+                    "exercise_id": 1,
+                    "sets": [
+                        {"amount": 8, "weight": 40},
+                        {"amount": 8, "weight": 60},
+                        {"amount": 6, "weight": 90},
+                        {"amount": 2, "weight": 110}
+                    ]
+                }
+            ]
         }
     ]
 }

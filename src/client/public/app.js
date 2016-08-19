@@ -29696,13 +29696,13 @@
 	
 	exports.default = mainReducer;
 	var initialState = {
-	    name: '',
 	    pending: null,
 	    done: null,
 	    workouts: [],
 	    workout_type: 1,
 	    exercise_type: 1,
 	    exercises: [],
+	    muscles: [],
 	    session_start: false
 	};
 	
@@ -29736,6 +29736,14 @@
 	        });
 	    }
 	
+	    if (action.type == "GET_SESSIONS_SUCCES") {
+	        return _extends({}, state, {
+	            sessions: action.data,
+	            pending: false,
+	            done: true
+	        });
+	    }
+	
 	    if (action.type == "GET_EXERCISE_SUCCES") {
 	        return _extends({}, state, {
 	            exercises: action.data,
@@ -29747,6 +29755,14 @@
 	    if (action.type == "GET_WORKOUT_SUCCES") {
 	        return _extends({}, state, {
 	            workouts: action.data,
+	            pending: false,
+	            done: true
+	        });
+	    }
+	
+	    if (action.type == "GET_MUSCLES_SUCCES") {
+	        return _extends({}, state, {
+	            muscles: action.data,
 	            pending: false,
 	            done: true
 	        });
@@ -29838,8 +29854,9 @@
 	exports.default = (0, _reactRedux.connect)(function (state) {
 	  return {
 	    workouts: state.main.workouts,
-	    workout_type: state.main.workout_type,
 	    exercises: state.main.exercises,
+	    workout_type: state.main.workout_type,
+	    exercise_type: state.main.exercise_type,
 	    session_start: state.main.session_start,
 	    done: state.main.done,
 	    pending: state.main.pending
@@ -29922,10 +29939,28 @@
 	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Nav).call(this));
 	
 	    _this.cancelWorkout = _this.cancelWorkout.bind(_this);
+	    _this.openMenu = _this.openMenu.bind(_this);
+	
+	    _this.state = {
+	      menu: false
+	    };
 	    return _this;
 	  }
 	
 	  _createClass(Nav, [{
+	    key: 'openMenu',
+	    value: function openMenu() {
+	      if (this.state.menu == false) {
+	        this.setState({
+	          menu: true
+	        });
+	      } else {
+	        this.setState({
+	          menu: false
+	        });
+	      }
+	    }
+	  }, {
 	    key: 'cancelWorkout',
 	    value: function cancelWorkout() {
 	      this.props.dispatch((0, _actions.startWorkout)(false));
@@ -29945,6 +29980,46 @@
 	            'FitIt'
 	          ),
 	          _react2.default.createElement(
+	            'button',
+	            { 'data-open-menu': true, onClick: this.openMenu, className: 'btn btn--transparent' },
+	            'Open menu'
+	          ),
+	          this.props.session_start == true ? _react2.default.createElement(
+	            'button',
+	            { className: 'btn btn--transparent', onClick: this.cancelWorkout },
+	            'Cancel session'
+	          ) : '',
+	          this.state.menu == true ? _react2.default.createElement(
+	            'ul',
+	            { className: 'list open' },
+	            _react2.default.createElement(
+	              'li',
+	              { className: 'list__item' },
+	              _react2.default.createElement(
+	                _reactRouter.Link,
+	                { to: '/dashboard' },
+	                'Dashboard'
+	              )
+	            ),
+	            _react2.default.createElement(
+	              'li',
+	              { className: 'list__item' },
+	              _react2.default.createElement(
+	                _reactRouter.Link,
+	                { to: '/add-workout' },
+	                'Create workout'
+	              )
+	            ),
+	            _react2.default.createElement(
+	              'li',
+	              { className: 'list__item' },
+	              _react2.default.createElement(
+	                _reactRouter.Link,
+	                { to: '/' },
+	                'Start workout'
+	              )
+	            )
+	          ) : _react2.default.createElement(
 	            'ul',
 	            { className: 'list' },
 	            _react2.default.createElement(
@@ -29974,12 +30049,7 @@
 	                'Start workout'
 	              )
 	            )
-	          ),
-	          this.props.session_start == true ? _react2.default.createElement(
-	            'button',
-	            { className: 'btn btn--transparent', onClick: this.cancelWorkout },
-	            'Cancel session'
-	          ) : ''
+	          )
 	        )
 	      );
 	    }
@@ -30004,83 +30074,125 @@
 	'use strict';
 	
 	Object.defineProperty(exports, "__esModule", {
-	    value: true
+	  value: true
 	});
 	exports.setName = setName;
 	exports.getDataPending = getDataPending;
 	exports.getDataFail = getDataFail;
 	exports.getWorkoutSucces = getWorkoutSucces;
 	exports.getExerciseSucces = getExerciseSucces;
+	exports.getMusclesSucces = getMusclesSucces;
+	exports.getSessionsSucces = getSessionsSucces;
 	exports.setWorkoutType = setWorkoutType;
 	exports.setExercise = setExercise;
 	exports.startWorkout = startWorkout;
+	exports.getSessions = getSessions;
 	exports.getWorkouts = getWorkouts;
 	exports.getExercises = getExercises;
+	exports.getMuscles = getMuscles;
 	function setName(name) {
-	    return { type: 'SET_NAME', name: name };
+	  return { type: 'SET_NAME', name: name };
 	}
 	
 	//General functions for API calls
 	function getDataPending() {
-	    return { type: 'GET_DATA_PENDING' };
+	  return { type: 'GET_DATA_PENDING' };
 	}
 	
 	function getDataFail(err) {
-	    console.log(err);
-	    return { type: 'GET_DATA_FAIL', err: err };
+	  console.log(err);
+	  return { type: 'GET_DATA_FAIL', err: err };
 	}
 	
 	//Specific succes actions for API Calls
 	function getWorkoutSucces(data) {
-	    return { type: 'GET_WORKOUT_SUCCES', data: data };
+	  return { type: 'GET_WORKOUT_SUCCES', data: data };
 	}
 	
 	function getExerciseSucces(data) {
-	    return { type: 'GET_EXERCISE_SUCCES', data: data };
+	  return { type: 'GET_EXERCISE_SUCCES', data: data };
+	}
+	
+	function getMusclesSucces(data) {
+	  return { type: 'GET_MUSCLES_SUCCES', data: data };
+	}
+	
+	function getSessionsSucces(data) {
+	  return { type: 'GET_SESSIONS_SUCCES', data: data };
 	}
 	
 	//Dispatch sorts
 	function setWorkoutType(id) {
-	    return { type: 'SET_WORKOUT_TYPE', id: id };
+	  return { type: 'SET_WORKOUT_TYPE', id: id };
 	}
 	
 	function setExercise(id) {
-	    return { type: 'SET_EXERCISE_TYPE', id: id };
+	  return { type: 'SET_EXERCISE_TYPE', id: id };
 	}
 	
 	function startWorkout(data) {
-	    return { type: "START_WORKOUT", data: data };
+	  return { type: "START_WORKOUT", data: data };
 	}
 	
 	//API calls
+	function getSessions() {
+	  return function (dispatch, newState) {
+	    return new Promise(function (resolve, reject) {
+	      dispatch(getDataPending());
+	      fetch('app/data/data.json', { method: 'get' }).then(function (res) {
+	        return res.json();
+	      }).then(function (data) {
+	        dispatch(getSessionsSucces(data.sessions));
+	      }).catch(function (err) {
+	        dispatch(getDataFail(err));
+	      });
+	    });
+	  };
+	}
+	
 	function getWorkouts() {
-	    return function (dispatch, newState) {
-	        return new Promise(function (resolve, reject) {
-	            dispatch(getDataPending());
-	            fetch('app/data/data.json', { method: 'get' }).then(function (res) {
-	                return res.json();
-	            }).then(function (data) {
-	                dispatch(getWorkoutSucces(data.workouts));
-	            }).catch(function (err) {
-	                dispatch(getDataFail(err));
-	            });
-	        });
-	    };
+	  return function (dispatch, newState) {
+	    return new Promise(function (resolve, reject) {
+	      dispatch(getDataPending());
+	      fetch('app/data/data.json', { method: 'get' }).then(function (res) {
+	        return res.json();
+	      }).then(function (data) {
+	        dispatch(getWorkoutSucces(data.workouts));
+	      }).catch(function (err) {
+	        dispatch(getDataFail(err));
+	      });
+	    });
+	  };
 	}
 	
 	function getExercises() {
-	    return function (dispatch, newState) {
-	        return new Promise(function (resolve, reject) {
-	            dispatch(getDataPending());
-	            fetch('app/data/data.json', { method: 'get' }).then(function (res) {
-	                return res.json();
-	            }).then(function (data) {
-	                dispatch(getExerciseSucces(data.exercises));
-	            }).catch(function (err) {
-	                dispatch(getDataFail(err));
-	            });
-	        });
-	    };
+	  return function (dispatch, newState) {
+	    return new Promise(function (resolve, reject) {
+	      dispatch(getDataPending());
+	      fetch('app/data/data.json', { method: 'get' }).then(function (res) {
+	        return res.json();
+	      }).then(function (data) {
+	        dispatch(getExerciseSucces(data.exercises));
+	      }).catch(function (err) {
+	        dispatch(getDataFail(err));
+	      });
+	    });
+	  };
+	}
+	
+	function getMuscles() {
+	  return function (dispatch, newState) {
+	    return new Promise(function (resolve, reject) {
+	      dispatch(getDataPending());
+	      fetch('app/data/data.json', { method: 'get' }).then(function (res) {
+	        return res.json();
+	      }).then(function (data) {
+	        dispatch(getMusclesSucces(data.muscles));
+	      }).catch(function (err) {
+	        dispatch(getDataFail(err));
+	      });
+	    });
+	  };
 	}
 
 /***/ },
@@ -30433,7 +30545,7 @@
 	'use strict';
 	
 	Object.defineProperty(exports, "__esModule", {
-	    value: true
+	  value: true
 	});
 	
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -30442,9 +30554,13 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
+	var _reactRedux = __webpack_require__(/*! react-redux */ 176);
+	
 	var _nav = __webpack_require__(/*! ../components/nav.jsx */ 270);
 	
 	var _nav2 = _interopRequireDefault(_nav);
+	
+	var _actions = __webpack_require__(/*! ../actions/actions.js */ 271);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -30455,65 +30571,87 @@
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 	
 	var Dashboard = function (_React$Component) {
-	    _inherits(Dashboard, _React$Component);
+	  _inherits(Dashboard, _React$Component);
 	
-	    function Dashboard() {
-	        _classCallCheck(this, Dashboard);
+	  function Dashboard() {
+	    _classCallCheck(this, Dashboard);
 	
-	        return _possibleConstructorReturn(this, Object.getPrototypeOf(Dashboard).apply(this, arguments));
+	    return _possibleConstructorReturn(this, Object.getPrototypeOf(Dashboard).call(this));
+	  }
+	
+	  _createClass(Dashboard, [{
+	    key: 'componentDidMount',
+	    value: function componentDidMount() {
+	      this.props.dispatch((0, _actions.getSessions)());
+	      this.props.dispatch((0, _actions.getWorkouts)());
+	      this.props.dispatch((0, _actions.getExercises)());
 	    }
-	
-	    _createClass(Dashboard, [{
-	        key: 'render',
-	        value: function render() {
-	
-	            return _react2.default.createElement(
-	                'div',
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      console.log(this.props.sessions, this.props.done);
+	      return _react2.default.createElement(
+	        'div',
+	        null,
+	        _react2.default.createElement(_nav2.default, null),
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'container' },
+	          _react2.default.createElement(
+	            'h2',
+	            null,
+	            'Dashboard'
+	          ),
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'block--row' },
+	            _react2.default.createElement(
+	              'div',
+	              { className: 'block block--half' },
+	              _react2.default.createElement(
+	                'h3',
 	                null,
-	                _react2.default.createElement(_nav2.default, null),
-	                _react2.default.createElement(
-	                    'div',
-	                    { className: 'container' },
-	                    _react2.default.createElement(
-	                        'div',
-	                        { className: 'block--row' },
-	                        _react2.default.createElement(
-	                            'div',
-	                            { className: 'block block--half' },
-	                            _react2.default.createElement(
-	                                'p',
-	                                null,
-	                                'Lorem Ipsum is slechts een proeftekst uit het drukkerij- en zetterijwezen. Lorem Ipsum is de standaard proeftekst in deze bedrijfstak sinds de 16e eeuw, toen een onbekende drukker een zethaak met letters nam en ze door elkaar husselde om een font-catalogus te maken.'
-	                            )
-	                        ),
-	                        _react2.default.createElement(
-	                            'div',
-	                            { className: 'block block--half' },
-	                            _react2.default.createElement(
-	                                'p',
-	                                null,
-	                                'Het heeft niet alleen vijf eeuwen overleefd maar is ook, vrijwel onveranderd, overgenomen in elektronische letterzetting. Het is in de jaren 60 populair geworden met de introductie van Letraset vellen met Lorem Ipsum passages en meer recentelijk door desktop publishing software zoals Aldus PageMaker die versies van Lorem Ipsum bevatten.'
-	                            )
-	                        )
-	                    ),
-	                    _react2.default.createElement(
-	                        'div',
-	                        { className: 'block block--full' },
-	                        _react2.default.createElement(
-	                            'p',
-	                            null,
-	                            'Het is al geruime tijd een bekend gegeven dat een lezer, tijdens het bekijken van de layout van een pagina, afgeleid wordt door de tekstuele inhoud.'
-	                        )
-	                    )
-	                )
-	            );
-	        }
-	    }]);
+	                'Personal Records'
+	              ),
+	              _react2.default.createElement('p', null)
+	            ),
+	            _react2.default.createElement(
+	              'div',
+	              { className: 'block block--half' },
+	              _react2.default.createElement(
+	                'h3',
+	                null,
+	                'History'
+	              )
+	            )
+	          ),
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'block block--full' },
+	            _react2.default.createElement(
+	              'h3',
+	              null,
+	              'Progress'
+	            ),
+	            _react2.default.createElement('p', null)
+	          )
+	        )
+	      );
+	    }
+	  }]);
 	
-	    return Dashboard;
+	  return Dashboard;
 	}(_react2.default.Component);
 	
-	exports.default = Dashboard;
+	exports.default = (0, _reactRedux.connect)(function (state) {
+	  return {
+	    workouts: state.main.workouts,
+	    exercises: state.main.exercises,
+	    sessions: state.main.sessions,
+	    done: state.main.done,
+	    pending: state.main.pending
+	  };
+	})(Dashboard);
 
 /***/ },
 /* 276 */
@@ -30560,8 +30698,10 @@
 	
 	    _this.setWorkoutName = _this.setWorkoutName.bind(_this);
 	    _this.addExercise = _this.addExercise.bind(_this);
+	    _this.setMuscleType = _this.setMuscleType.bind(_this);
 	
 	    _this.state = {
+	      primary_muscle_id: 1,
 	      nameWorkout: ''
 	    };
 	
@@ -30574,6 +30714,7 @@
 	    value: function componentDidMount() {
 	      this.props.dispatch((0, _actions.getWorkouts)());
 	      this.props.dispatch((0, _actions.getExercises)());
+	      this.props.dispatch((0, _actions.getMuscles)());
 	    }
 	  }, {
 	    key: 'setWorkoutName',
@@ -30589,9 +30730,15 @@
 	        id: id,
 	        name: value
 	      };
-	      console.log(arr);
 	      this.setState({
 	        exercises: ''
+	      });
+	    }
+	  }, {
+	    key: 'setMuscleType',
+	    value: function setMuscleType(id) {
+	      this.setState({
+	        primary_muscle_id: id
 	      });
 	    }
 	  }, {
@@ -30599,7 +30746,6 @@
 	    value: function render() {
 	      var _this2 = this;
 	
-	      console.log(this.state);
 	      return _react2.default.createElement(
 	        'div',
 	        null,
@@ -30640,7 +30786,24 @@
 	                null,
 	                'Select the exercises for this workout'
 	              ),
-	              this.props.exercises.map(function (exercise) {
+	              _react2.default.createElement(
+	                'div',
+	                { className: 'btn--tabs' },
+	                this.props.muscles.map(function (muscle) {
+	                  return _react2.default.createElement(
+	                    'button',
+	                    { className: 'btn btn--tab', onClick: function onClick(ev) {
+	                        return _this2.setMuscleType(ev.target.dataset.id);
+	                      }, 'data-id': muscle.id, key: muscle.id },
+	                    muscle.primary_muscle
+	                  );
+	                })
+	              ),
+	              this.props.exercises.filter(function (exercise) {
+	                return exercise.primary_muscle_id == _this2.state.primary_muscle_id;
+	              }).length > 0 ? this.props.exercises.filter(function (exercise) {
+	                return exercise.primary_muscle_id === parseInt(_this2.state.primary_muscle_id);
+	              }).map(function (exercise) {
 	                return _react2.default.createElement(
 	                  'div',
 	                  { key: exercise.id },
@@ -30653,7 +30816,7 @@
 	                    exercise.name
 	                  )
 	                );
-	              })
+	              }) : 'You did not add anything to this muscle. For exercises to show up for a certain muscle add the muscle as "Primary Muscle". Visit this link to do'
 	            )
 	          )
 	        )
@@ -30668,6 +30831,7 @@
 	  return {
 	    workouts: state.main.workouts,
 	    exercises: state.main.exercises,
+	    muscles: state.main.muscles,
 	    done: state.main.done,
 	    pending: state.main.pending
 	  };

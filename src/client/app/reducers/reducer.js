@@ -1,11 +1,11 @@
 const initialState = {
-    name: '',
     pending: null,
     done: null,
     workouts: [],
     workout_type: 1,
     exercise_type: 1,
     exercises: [],
+    muscles: [],
     session_start: false,
 }
 
@@ -40,6 +40,15 @@ export default function mainReducer(state = initialState, action){
         }
     }
 
+    if (action.type == "GET_SESSIONS_SUCCES") {
+        return {
+            ...state,
+            sessions: action.data,
+            pending: false,
+            done: true,
+        }
+    }
+
 
     if (action.type == "GET_EXERCISE_SUCCES") {
         return {
@@ -54,6 +63,15 @@ export default function mainReducer(state = initialState, action){
         return {
             ...state,
             workouts: action.data,
+            pending: false,
+            done: true,
+        }
+    }
+
+    if (action.type == "GET_MUSCLES_SUCCES") {
+        return {
+            ...state,
+            muscles: action.data,
             pending: false,
             done: true,
         }

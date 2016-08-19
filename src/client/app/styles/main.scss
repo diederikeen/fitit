@@ -1,5 +1,10 @@
+//Utils
 @import "./utils/_vars.scss";
-@import "./gui/_gui.scss";
+
+//GUI kit
+@import "./gui.scss";
+
+//Components
 @import "./components/_form.scss";
 @import "./components/_blocks.scss";
 @import "./components/_nav.scss";

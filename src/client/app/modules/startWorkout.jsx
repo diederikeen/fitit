@@ -10,8 +10,6 @@ class StartWorkout extends React.Component{
       super();
     }
 
-
-
     render(){
       return(
         <div>
@@ -33,8 +31,9 @@ class StartWorkout extends React.Component{
 
 export default connect(state => ({
   workouts: state.main.workouts,
-  workout_type: state.main.workout_type,
   exercises: state.main.exercises,
+  workout_type: state.main.workout_type,
+  exercise_type: state.main.exercise_type,
   session_start: state.main.session_start,
   done: state.main.done,
   pending: state.main.pending,
