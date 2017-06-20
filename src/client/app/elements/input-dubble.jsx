@@ -9,5 +9,3 @@ export default function DubbleInput({ children, ...props }) {
     </div>
   )
 }
-
-export default DubbleInput;
